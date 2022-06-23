@@ -1,0 +1,7 @@
+wIslandInfo:
+  database:
+    url:
+    username:
+    password:
+  settings:
+    points-end: 800
