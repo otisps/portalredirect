@@ -10,11 +10,10 @@ public class ReloadCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player){
-            if(!sender.isOp()){
-                return true;
-            }
+            return true;
         }
         PortalRedirect.getInstance().reloadConfig();
+        sender.sendMessage("You just reloaded config!");
         return true;
     }
 }

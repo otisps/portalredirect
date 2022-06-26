@@ -57,8 +57,13 @@ public class WorldGuardManager {
         }
         num -= 2;
         Random rand = new Random();
-        int int_random = rand.nextInt(num);
-        int_random++;
+        int int_random;
+        if(num == 0) {
+            int_random = 1;
+        } else {
+            int_random = rand.nextInt(num);
+            int_random++;
+        }
         String path = "random-locations." + int_random;
         double x_value = config.getDouble(path + ".x");
         double y_value = config.getDouble(path + ".y");

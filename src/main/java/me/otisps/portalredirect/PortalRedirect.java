@@ -11,7 +11,6 @@ import java.util.UUID;
 public final class PortalRedirect extends JavaPlugin {
 
     private static PortalRedirect instance;
-    private static Connection connection;
 
     // key = player long = epoch time
     public static HashMap<UUID, Long> remainingCooldown  = new HashMap<>();;
@@ -30,13 +29,5 @@ public final class PortalRedirect extends JavaPlugin {
 
     public static PortalRedirect getInstance() {
         return instance;
-    }
-
-    public static Connection getConnection() {
-        return connection;
-    }
-
-    public static void setConnection(Connection connection) {
-        PortalRedirect.connection = connection;
     }
 }
