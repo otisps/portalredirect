@@ -11,3 +11,13 @@ settings:
   rebound-cooldown: 2000 # Milliseconds
 messages:
   cant-teleport: "&c&lI'm sorry but you need more points to teleport to the end."
+random-locations:
+  1:
+    x: 130
+    y: 44
+    z: -130
+  2:
+    x:
+    y:
+    z:
+  # ... for as many locations as you need

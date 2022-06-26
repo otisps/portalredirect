@@ -17,24 +17,16 @@ public class Database {
             }
         }
         final FileConfiguration config = plugin.getConfig(); // GET CONFIGS HOST
-        Bukkit.getScheduler().runTaskAsynchronously(
-                PortalRedirect.getInstance(), new Runnable() {
-            @Override
-            public void run() {
-                String url = config.getString("wIslandInfo.database.url");
-                String username = config.getString("wIslandInfo.database.username");// & LOGIN
-                String password = config.getString("wIslandInfo.database.password");// DETAILS
 
-                Connection newConnection = null;
-                try {
-                    newConnection = DriverManager.getConnection(url, username, password);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-                PortalRedirect.setConnection(newConnection);
-            }
-        }
-        );
+        String url = config.getString("wIslandInfo.database.url");
+        String username = config.getString("wIslandInfo.database.username");// & LOGIN
+        String password = config.getString("wIslandInfo.database.password");// DETAILS
+
+        Connection newConnection = null;
+
+        newConnection = DriverManager.getConnection(url, username, password);
+
+        PortalRedirect.setConnection(newConnection);
         return PortalRedirect.getConnection();
     }
 

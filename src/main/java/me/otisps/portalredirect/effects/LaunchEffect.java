@@ -1,7 +1,11 @@
 package me.otisps.portalredirect.effects;
 
+import me.otisps.portalredirect.PortalRedirect;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.Vector;
+
+import javax.sound.sampled.Port;
 
 public class LaunchEffect {
     /**
@@ -9,12 +13,17 @@ public class LaunchEffect {
      * @param player desired target player
      */
     public void launchBackwards(Player player){
-        player.setVelocity(player.getVelocity().subtract(new Vector(player.getVelocity().getX() * 2, player.getVelocity().getY() - 1.5, player.getVelocity().getZ() * 2).multiply(1.1)));
-
-
-
-
-
+        
+        player.setVelocity(new Vector(0, 1, 0));
+        Vector eyeDirection = player.getLocation().getDirection();
+        eyeDirection.setY(0);
+        BukkitScheduler scheduler = PortalRedirect.getInstance().getServer().getScheduler();
+        scheduler.scheduleSyncDelayedTask(PortalRedirect.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                player.setVelocity(eyeDirection.multiply(-1));
+            }
+        }, 5L);
     }
 
 }
