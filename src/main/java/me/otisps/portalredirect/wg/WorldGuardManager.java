@@ -26,7 +26,7 @@ public class WorldGuardManager {
         RegionManager manager = container.get(BukkitAdapter.adapt(Bukkit.getWorld("world")));
         for (ProtectedRegion region: manager.getRegions().values()) { // IF INSIDE THE LIST OF REGIONS
             if(region.getMembers().contains(player.getUniqueId()) || region.getOwners().contains(player.getUniqueId())){
-                String command = "rg tp -w world " + region.getId();
+                String command = "rgtp " + player.getName() + " " + region.getId();
                 Boolean wasOp = false;
                 if(player.isOp()) {
                     wasOp = true;

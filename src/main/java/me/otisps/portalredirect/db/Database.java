@@ -28,8 +28,10 @@ public class Database {
         ResultSet results =  statement.executeQuery(); // AND EXECUTE
         if(results.next()) {
             double score = results.getDouble("score"); // THEN CHECK SCORE
+            statement.close();
             return score;
         }
+        statement.close();
         return 0; // IF NOT FOUND MUST BE 0
     }
 }
