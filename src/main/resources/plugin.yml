@@ -4,3 +4,4 @@ main: me.otisps.portalredirect.PortalRedirect
 api-version: 1.18
 authors: [ otisps ]
 description:
+depend: [WorldGuard]

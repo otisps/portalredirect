@@ -3,5 +3,11 @@ wIslandInfo:
     url:
     username:
     password:
-  settings:
-    points-end: 800
+settings:
+  points-end: 800
+  world-name: "world"
+  nether-name: "world_nether"
+  end-name: "world_the_end"
+  rebound-cooldown: 2000 # Milliseconds
+messages:
+  cant-teleport: "&c&lI'm sorry but you need more points to teleport to the end."
