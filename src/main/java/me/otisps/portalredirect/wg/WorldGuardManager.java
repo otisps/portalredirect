@@ -12,6 +12,8 @@ import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import java.util.Random;
+
 public class WorldGuardManager {
     /**
      * Finds a player and teleports it to the region where the player is from
@@ -50,11 +52,14 @@ public class WorldGuardManager {
     public void randomTeleportPlayer(Player player){
         final FileConfiguration config = PortalRedirect.getInstance().getConfig();
         int num = 1;
-        while(config.contains("random-locations." +num+ "x")){
+        while(config.contains("random-locations." +num+ ".x")){
             num++;
         }
-        int random = (int) (Math.random() * num + 1);
-        String path = "random-locations." + random;
+        num -= 2;
+        Random rand = new Random();
+        int int_random = rand.nextInt(num);
+        int_random++;
+        String path = "random-locations." + int_random;
         double x_value = config.getDouble(path + ".x");
         double y_value = config.getDouble(path + ".y");
         double z_value = config.getDouble(path + ".z");

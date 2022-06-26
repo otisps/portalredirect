@@ -14,15 +14,15 @@ public class LaunchEffect {
      */
     public void launchBackwards(Player player){
         
-        player.setVelocity(new Vector(0, 1, 0));
+        player.setVelocity(new Vector(0, 1, 0)); // THROW UPWARDS
         Vector eyeDirection = player.getLocation().getDirection();
-        eyeDirection.setY(0);
+        eyeDirection.setY(0); // FIND VECTOR OF EYE DIRECTION AND SET Y COMPONENT TO 0
         BukkitScheduler scheduler = PortalRedirect.getInstance().getServer().getScheduler();
         scheduler.scheduleSyncDelayedTask(PortalRedirect.getInstance(), new Runnable() {
             @Override
             public void run() {
                 player.setVelocity(eyeDirection.multiply(-1));
-            }
+            } // MOMENTS LATER FIRE BACK
         }, 5L);
     }
 

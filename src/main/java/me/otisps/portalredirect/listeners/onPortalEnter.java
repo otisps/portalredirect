@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPortalEnterEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
@@ -20,9 +19,9 @@ public class onPortalEnter implements Listener {
 
     @EventHandler
     public void toEndEvent(PlayerPortalEvent event){
-        final Player player = event.getPlayer(); // Player teleporting
+        Player player = event.getPlayer();
         if (event.getCause().equals(PlayerTeleportEvent.TeleportCause.END_PORTAL)){ // IF END PORTAL
-            if(player.getWorld().getEnvironment().equals(World.Environment.NORMAL)) { // & GOING FROM NORMAL WWORLD
+            if(player.getWorld().getEnvironment().equals(World.Environment.NORMAL)) { // & GOING FROM NORMAL WORLD
                 Database database = new Database(); // THEN OPEN THE DATABASE CONNECTION
                 Double points; // AND FIND OUT
                 try {
@@ -35,14 +34,16 @@ public class onPortalEnter implements Listener {
                 } // AND CANCEL IF NOT ENOUGH
                 event.setCancelled(true);
                 if (PortalRedirect.remainingCooldown.containsKey(player.getUniqueId())) {
-                    if (System.currentTimeMillis() - PortalRedirect.remainingCooldown.get(player.getUniqueId()) < 2000) {
+                    if (System.currentTimeMillis() - PortalRedirect.remainingCooldown.get(player.getUniqueId()) < PortalRedirect.getInstance().getConfig().getLong("settings.rebound-cooldown")) {
                         return;
                     } //  LAUNCH THEM BACK & TELL THEM THEY NEED MORE POINTS
                 }
-                player.sendMessage("You need more points to teleport."); // TODO CONFIG
+                player.sendMessage(PortalRedirect.getInstance().getConfig().getString("messages.missing-points"));
+
                 LaunchEffect launchEffect = new LaunchEffect();
-                launchEffect.launchBackwards(player); // TODO MAKE GOOD
-                // WE START A COOLDOWN SO WE DONT HAVE WEIRD DOUBLE LAUNCHES IF ITS LAGGY
+                launchEffect.launchBackwards(player);
+
+                // THEN START A COOLDOWN SO WE DON'T HAVE WEIRD DOUBLE LAUNCHES IF ITS LAGGY
                 PortalRedirect.remainingCooldown.put(player.getUniqueId(), System.currentTimeMillis());
                 return;
             }
@@ -52,7 +53,6 @@ public class onPortalEnter implements Listener {
     public void netherPortalEvent(PlayerPortalEvent event){
         Player player = event.getPlayer();
         World.Environment environment = player.getWorld().getEnvironment();  // FIND OUT
-        PlayerTeleportEvent.TeleportCause teleportCause = event.getCause();
         if(event.getCause().equals(PlayerTeleportEvent.TeleportCause.NETHER_PORTAL)){ // IF NETHER PORTAL
             if(environment.equals(World.Environment.NORMAL)){ // AND IF NORMAL -> NETHER
                 return;
@@ -60,7 +60,7 @@ public class onPortalEnter implements Listener {
             if (environment.equals(World.Environment.NETHER)){ // OR IF NETHER -> NORMAL
                 event.setCancelled(true); // IF NETHER -> NORMAL CANCEL
                 WorldGuardManager worldGuardManager = new WorldGuardManager();
-                worldGuardManager.teleportPlayer(player); // AS WE TELEPORT THEM OURSELVES
+                worldGuardManager.teleportPlayer(player); // TELEPORT THEM OURSELVES
                 return;
             }
         }
@@ -71,8 +71,8 @@ public class onPortalEnter implements Listener {
     public void exitEndEvent(EntityPortalEnterEvent event){ // IF END -> NORMAL
         if(event.getEntity().getWorld().getEnvironment().equals(World.Environment.THE_END)){
             Player player = Bukkit.getPlayer(event.getEntity().getUniqueId());
-            final WorldGuardManager worldGuardManager = new WorldGuardManager();
-            worldGuardManager.teleportPlayer(player); // AS WE TELEPORT THEM OURSELVES
+            WorldGuardManager worldGuardManager = new WorldGuardManager();
+            worldGuardManager.teleportPlayer(player); // TELEPORT THEM OURSELVES
             return;
         }
     }

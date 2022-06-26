@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.otisps</groupId>
-    <artifactId>PortalRedirect</artifactId>
-    <version>1.0.2</version>
+    <artifactId>portalredirect</artifactId>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
 
     <name>PortalRedirect</name>

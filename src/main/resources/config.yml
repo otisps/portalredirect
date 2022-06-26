@@ -1,21 +1,21 @@
 wIslandInfo:
   database:
-    url:
+    host:
+    port:
+    database:
     username:
     password:
 settings:
   points-end: 800
   world-name: "world"
-  nether-name: "world_nether"
-  end-name: "world_the_end"
-  rebound-cooldown: 2000 # Milliseconds
+  rebound-cooldown: 500 # Milliseconds
 messages:
-  cant-teleport: "&c&lI'm sorry but you need more points to teleport to the end."
+  missing-points: "&c&lI'm sorry but you need more points to teleport to the end."
 random-locations:
   1:
-    x: 130
-    y: 44
-    z: -130
+    x:
+    y:
+    z:
   2:
     x:
     y:
