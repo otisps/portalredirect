@@ -5,3 +5,7 @@ api-version: 1.18
 authors: [ otisps ]
 description:
 depend: [WorldGuard]
+commands:
+  portalredirectreload:
+    description: reloads config op or console only
+    aliases: prreload

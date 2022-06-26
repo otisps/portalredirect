@@ -3,6 +3,7 @@ package me.otisps.portalredirect.listeners;
 import me.otisps.portalredirect.PortalRedirect;
 import me.otisps.portalredirect.db.Database;
 import me.otisps.portalredirect.effects.LaunchEffect;
+import me.otisps.portalredirect.utils.ChatUtils;
 import me.otisps.portalredirect.wg.WorldGuardManager;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -38,7 +39,11 @@ public class onPortalEnter implements Listener {
                         return;
                     } //  LAUNCH THEM BACK & TELL THEM THEY NEED MORE POINTS
                 }
-                player.sendMessage(PortalRedirect.getInstance().getConfig().getString("messages.missing-points"));
+
+                String message = PortalRedirect.getInstance().getConfig().getString("messages.missing-points");
+                ChatUtils chatUtils = new ChatUtils();
+                String formattedMessage = chatUtils.hexFormat(message);
+                player.sendMessage(formattedMessage);
 
                 LaunchEffect launchEffect = new LaunchEffect();
                 launchEffect.launchBackwards(player);

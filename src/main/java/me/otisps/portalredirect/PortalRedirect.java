@@ -1,5 +1,6 @@
 package me.otisps.portalredirect;
 
+import me.otisps.portalredirect.commands.ReloadCommand;
 import me.otisps.portalredirect.listeners.onPortalEnter;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -19,7 +20,7 @@ public final class PortalRedirect extends JavaPlugin {
         instance = this;
         getServer().getPluginManager().registerEvents(new onPortalEnter(), this);
         saveDefaultConfig();
-
+        getCommand("portalredirectreload").setExecutor(new ReloadCommand());
     }
 
     @Override

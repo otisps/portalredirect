@@ -1,5 +1,6 @@
 package me.otisps.portalredirect.commands;
 
+import me.otisps.portalredirect.PortalRedirect;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,8 +14,7 @@ public class ReloadCommand implements CommandExecutor {
                 return true;
             }
         }
-        // TODO: Reload config
-        // TODO: Message confirming ...
+        PortalRedirect.getInstance().reloadConfig();
         return true;
     }
 }
